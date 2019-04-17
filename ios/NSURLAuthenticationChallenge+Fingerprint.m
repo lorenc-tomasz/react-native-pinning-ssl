@@ -28,6 +28,7 @@ NSString *domainName;
   SecTrustEvaluate(serverTrust, &trustResultType);
   
   // get intermidate certificate
+  // [0] is for the leaf one
   SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, 1);
   NSData *data = CFBridgingRelease(SecCertificateCopyData(certificate));
   

@@ -69,7 +69,9 @@ public class RNPinningSsl extends ReactContextBaseJavaModule {
     final HttpsURLConnection con = (HttpsURLConnection) new URL(httpsURL).openConnection();
     con.setConnectTimeout(5000);
     con.connect();
-    final Certificate cert = con.getServerCertificates()[1]; // get intermidate cert
+    // get intermediate cert
+    // [0] is the leaf one
+    final Certificate cert = con.getServerCertificates()[1];
     final MessageDigest mdSHA1 = MessageDigest.getInstance("SHA1");
 
     strCert = cert.toString();
