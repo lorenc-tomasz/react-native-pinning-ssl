@@ -47,15 +47,10 @@ public class RNPinningSsl extends ReactContextBaseJavaModule {
       final String serverCertFingerprint = getFingerprint(serverURL);
       Boolean isValid = false;
 
-      for(int i =0; i<domainNames.size(); i++){
-        if( strCert.contains(domainNames.getString(i))){
-          for (int j=0; j<hashes.size(); j++) {
-            if (hashes.getString(j).equalsIgnoreCase(serverCertFingerprint)) {
-              promise.resolve(true); 
-              isValid = true;
-              break;
-            }
-          }
+      for (int j=0; j<hashes.size(); j++) {
+        if (hashes.getString(j).equalsIgnoreCase(serverCertFingerprint)) {
+          promise.resolve(true); 
+          isValid = true;
           break;
         }
       }
@@ -74,7 +69,7 @@ public class RNPinningSsl extends ReactContextBaseJavaModule {
     final HttpsURLConnection con = (HttpsURLConnection) new URL(httpsURL).openConnection();
     con.setConnectTimeout(5000);
     con.connect();
-    final Certificate cert = con.getServerCertificates()[0];
+    final Certificate cert = con.getServerCertificates()[1]; // get intermidate cert
     final MessageDigest mdSHA1 = MessageDigest.getInstance("SHA1");
 
     strCert = cert.toString();

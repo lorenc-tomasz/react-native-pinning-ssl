@@ -27,7 +27,8 @@ NSString *domainName;
   SecTrustResultType trustResultType;
   SecTrustEvaluate(serverTrust, &trustResultType);
   
-  SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, 0);
+  // get intermidate certificate
+  SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, 1);
   NSData *data = CFBridgingRelease(SecCertificateCopyData(certificate));
   
   domainName = CFBridgingRelease(SecCertificateCopySubjectSummary(certificate));

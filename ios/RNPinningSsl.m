@@ -63,10 +63,8 @@ RCT_EXPORT_METHOD(getStatus:(NSString *)inputUrl
     for (NSString* hash in hashes) {
         
       if ([hash caseInsensitiveCompare:challenge.SHA1Fingerprint] == NSOrderedSame) {
-        if( [domainNames containsObject:challenge.DomainName]){
           isValid = YES;
           break;
-        }
       }
     }
   }
